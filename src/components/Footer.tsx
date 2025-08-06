@@ -1,9 +1,9 @@
 "use client"
-import { motion } from "motion/react"
+import { motion, Variants } from "motion/react"
 import { useState } from "react"
 
 // Animation variants for reusability
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
@@ -16,7 +16,7 @@ const containerVariants = {
   },
 }
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, x: -20 },
   visible: {
     opacity: 1,
@@ -25,7 +25,7 @@ const itemVariants = {
   },
 }
 
-const linkVariants = {
+const linkVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
@@ -34,7 +34,7 @@ const linkVariants = {
   },
 }
 
-const socialVariants = {
+const socialVariants: Variants = {
   hidden: { opacity: 0, scale: 0 },
   visible: {
     opacity: 1,
@@ -47,7 +47,7 @@ const socialVariants = {
   },
 }
 
-const backgroundVariants = {
+const backgroundVariants: Variants = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: {
     opacity: 1,
