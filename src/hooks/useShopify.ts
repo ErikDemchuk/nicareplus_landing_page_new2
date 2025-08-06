@@ -45,9 +45,15 @@ export function useProduct(handle: string | null) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!handle) return;
+    if (!handle) {
+      // Reset state when handle is null
+      setProduct(null);
+      setError(null);
+      setLoading(false);
+      return;
+    }
 
-    async function fetchProduct() {
+    async function fetchProduct(productHandle: string) {
       try {
         setLoading(true);
         
@@ -59,7 +65,7 @@ export function useProduct(handle: string | null) {
           return;
         }
         
-        const productData = await getProductByHandle(handle);
+        const productData = await getProductByHandle(productHandle);
         setProduct(productData);
         setError(null);
       } catch (err) {
@@ -69,7 +75,7 @@ export function useProduct(handle: string | null) {
       }
     }
 
-    fetchProduct();
+    fetchProduct(handle);
   }, [handle]);
 
   return { product, loading, error };
