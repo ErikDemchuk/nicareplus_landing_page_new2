@@ -15,8 +15,8 @@ Create a `.env.local` file in your project root with the following variables:
 ```env
 # Shopify Storefront API Configuration
 NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store-name.myshopify.com
-NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=48a665668d6696fd8d87f0a4171d55fe
-SHOPIFY_STOREFRONT_PRIVATE_ACCESS_TOKEN=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
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-storefront-access-token
+SHOPIFY_STOREFRONT_PRIVATE_ACCESS_TOKEN=your-private-access-token
 ```
 
 **Important:** Replace `your-store-name` with your actual Shopify store name.

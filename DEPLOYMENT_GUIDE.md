@@ -33,9 +33,9 @@ In Vercel dashboard:
 1. **Go to Settings** → Environment Variables
 2. **Add these variables**:
    ```
-   NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN = nicareplus.myshopify.com
-   NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN = 48a665668d6696fd8d87f0a4171d55fe
-   SHOPIFY_STOREFRONT_PRIVATE_ACCESS_TOKEN = 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
+   NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN = your-store.myshopify.com
+   NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN = your-storefront-access-token
+   SHOPIFY_STOREFRONT_PRIVATE_ACCESS_TOKEN = your-private-access-token
    ```
 
 ## Step 4: Deploy

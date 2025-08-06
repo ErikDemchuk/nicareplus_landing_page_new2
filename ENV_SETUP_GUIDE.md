@@ -8,8 +8,8 @@
 ```env
 # Shopify Storefront API Configuration
 NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store-name.myshopify.com
-NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=48a665668d6696fd8d87f0a4171d55fe
-SHOPIFY_STOREFRONT_PRIVATE_ACCESS_TOKEN=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
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-storefront-access-token
+SHOPIFY_STOREFRONT_PRIVATE_ACCESS_TOKEN=your-private-access-token
 ```
 
 ## Step 2: Get Your Shopify Store Name
@@ -20,11 +20,11 @@ Replace `your-store-name` with your actual Shopify store name. For example:
 
 ## Step 3: Verify Your Access Tokens
 
-From your screenshot, you have:
-- **Public Access Token**: `48a665668d6696fd8d87f0a4171d55fe`
-- **Private Access Token**: `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`
+Replace the placeholder tokens with your actual Shopify access tokens:
+- **Public Access Token**: Get from your Shopify admin
+- **Private Access Token**: Get from your Shopify admin
 
-These look correct and are already in the template above.
+Make sure to use your actual tokens, not the placeholders.
 
 ## Step 4: Complete Example
 
@@ -32,8 +32,8 @@ If your store is called "my-supplement-store", your `.env.local` should look lik
 
 ```env
 NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=my-supplement-store.myshopify.com
-NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=48a665668d6696fd8d87f0a4171d55fe
-SHOPIFY_STOREFRONT_PRIVATE_ACCESS_TOKEN=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
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-actual-storefront-token
+SHOPIFY_STOREFRONT_PRIVATE_ACCESS_TOKEN=your-actual-private-token
 ```
 
 ## Step 5: Restart Development Server
