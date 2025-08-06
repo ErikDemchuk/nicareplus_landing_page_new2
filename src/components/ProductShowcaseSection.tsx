@@ -377,7 +377,7 @@ export default function ProductShowcaseSection() {
                     y: -scrollProgress * 15
                   }}
                   exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                   className="text-base lg:text-lg text-gray-700 leading-relaxed"
                 >
             The average health-conscious consumer spends hundreds of dollars monthly on multiple supplements, each 
@@ -394,7 +394,7 @@ export default function ProductShowcaseSection() {
                     y: Math.max(0, (1 - scrollProgress) * 15)
                   }}
                   exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                   className="w-full"
                 >
                   {!showResults ? (
@@ -418,7 +418,7 @@ export default function ProductShowcaseSection() {
                             className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600"
                             initial={{ width: 0 }}
                             animate={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-                            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
                           />
                         </div>
                       </div>
@@ -430,7 +430,7 @@ export default function ProductShowcaseSection() {
                           initial={{ opacity: 0, x: 20 }}
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: -20 }}
-                          transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                          transition={{ duration: 0.25, ease: "easeOut" }}
                         >
                           <h3 className="text-2xl lg:text-3xl font-semibold text-gray-900 mb-10 text-center tracking-tight leading-tight">
                             {questions[currentQuestion].question}
@@ -479,7 +479,7 @@ export default function ProductShowcaseSection() {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
                       className="bg-white backdrop-blur-xl rounded-[20px] shadow-2xl border border-gray-200 p-8 lg:p-12 overflow-hidden"
                       style={{
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1)'

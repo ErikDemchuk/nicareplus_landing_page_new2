@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Findings - Flare-Up Solutions</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #000000;
+            line-height: 1.5;
+        }
+
+        /* Container Styles */
+        .research-section {
+            background-color: #FFFFFF;
+            margin: 20px auto;
+            padding: 60px 40px;
+            max-width: 1200px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Typography */
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #666666;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .main-text {
+            font-size: 24px;
+            line-height: 1.5;
+            color: #000000;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .main-text sup {
+            font-size: 14px;
+            vertical-align: super;
+        }
+
+        /* Button Styles */
+        .expand-button {
+            background-color: #00A89D;
+            color: #FFFFFF;
+            font-size: 16px;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 40px;
+            transition: background-color 0.3s ease;
+        }
+
+        .expand-button:hover {
+            background-color: #008b82;
+        }
+
+        .expand-button .plus-icon {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-button.active .plus-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Visual Comparison Styles */
+        .visuals-container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .figure-wrapper {
+            text-align: center;
+        }
+
+        .figure-label {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Human Figure Styles */
+        .human-figure {
+            width: 150px;
+            height: 300px;
+            position: relative;
+            margin: 0 auto 10px;
+        }
+
+        .figure-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .figure-fill {
+            transition: height 0.5s ease;
+        }
+
+        .percentage-label {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .percentage-subtext {
+            font-size: 14px;
+            color: #666666;
+            max-width: 150px;
+            margin: 0 auto;
+        }
+
+        /* Footer Note Styles */
+        .footer-note {
+            background-color: #008080;
+            color: #FFFFFF;
+            font-size: 14px;
+            padding: 16px;
+            border-radius: 10px;
+            max-width: 600px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .footer-note-icon {
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Sidebar Styles (Desktop) */
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background-color: #008080;
+            color: #FFFFFF;
+            padding: 40px;
+            overflow-y: auto;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .sidebar-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .sidebar p, .sidebar ul {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            padding-left: 20px;
+        }
+
+        .sidebar a {
+            color: #a0e0e0;
+            text-decoration: underline;
+        }
+
+        /* Modal Styles (Mobile) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #008080;
+            color: #FFFFFF;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .research-section {
+                padding: 40px 20px;
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .section-title {
+                font-size: 36px;
+                text-align: center;
+            }
+
+            .section-subtitle {
+                text-align: center;
+            }
+
+            .main-text {
+                font-size: 20px;
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .expand-button {
+                font-size: 14px;
+                min-height: 48px;
+                margin: 0 auto 30px;
+                display: flex;
+            }
+
+            .visuals-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .human-figure {
+                width: 120px;
+                height: 240px;
+            }
+
+            .percentage-label {
+                font-size: 32px;
+            }
+
+            .footer-note {
+                max-width: 100%;
+                font-size: 13px;
+            }
+
+            /* Hide sidebar on mobile */
+            .sidebar {
+                display: none;
+            }
+        }
+
+        /* Overlay for sidebar on desktop */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Section 1: Heat & Sweat -->
+    <section class="research-section" id="section1">
+        <h1 class="section-title">Our Research Findings</h1>
+        <p class="section-subtitle">HEAT & SWEAT TRIGGERS</p>
+        <p class="main-text">
+            Stuck Indoors While Everyone's Out? How Heat & Sweat Turn Flares into a Nightmare. 
+            Heat sparks sweat that breeds bacteria in your folds, turning minor flares into 
+            draining nightmares and forcing you indoors. Imagine a barrier absorbs sweat away, 
+            blocks infection, and lets you live.<sup>1-4</sup>
+        </p>
+        
+        <button class="expand-button" data-section="1">
+            What This Means <span class="plus-icon">+</span>
+        </button>
+
+        <div class="visuals-container">
+            <!-- Placebo Figure -->
+            <div class="figure-wrapper">
+                <p class="figure-label">After Placebo</p>
+                <div class="human-figure">
+                    <svg class="figure-svg" viewBox="0 0 150 300">
+                        <defs>
+                            <linearGradient id="placeboGradient1" x1="0%" y1="100%" x2="0%" y2="30%">
+                                <stop offset="0%" style="stop-color:#ffcccc;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff6666;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Human silhouette outline -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="none" stroke="#ddd" stroke-width="2"/>
+                        <!-- Fill based on percentage (70%) -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="url(#placeboGradient1)" opacity="0.6" 
+                              style="clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%);"/>
+                    </svg>
+                </div>
+                <p class="percentage-label" style="color: #ff6666;">70%</p>
+                <p class="percentage-subtext">Without Protection flare risk met</p>
+            </div>
+
+            <!-- Treatment Figure -->
+            <div class="figure-wrapper">
+                <p class="figure-label">After Dressing</p>
+                <div class="human-figure">
+                    <svg class="figure-svg" viewBox="0 0 150 300">
+                        <defs>
+                            <linearGradient id="treatmentGradient1" x1="0%" y1="100%" x2="0%" y2="5%">
+                                <stop offset="0%" style="stop-color:#ccffcc;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00A89D;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Human silhouette outline -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="none" stroke="#ddd" stroke-width="2"/>
+                        <!-- Fill based on percentage (95%) -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="url(#treatmentGradient1)" opacity="0.8" 
+                              style="clip-path: polygon(0 5%, 100% 5%, 100% 100%, 0 100%);"/>
+                    </svg>
+                </div>
+                <p class="percentage-label" style="color: #00A89D;">95%</p>
+                <p class="percentage-subtext">With Dressing protection met</p>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <div class="footer-note-icon">✓</div>
+            <p>Why this matters: In randomized trials, our dressing reduced flare risks by addressing heat & sweat effectively.</p>
+        </div>
+
+        <!-- Sidebar for Desktop -->
+        <div class="sidebar-overlay" data-section="1"></div>
+        <div class="sidebar" data-section="1">
+            <button class="sidebar-close">×</button>
+            <h3>Raw Reality</h3>
+            <p>It's 90° out, and you're glued to the couch with ice packs—while friends enjoy summer, you're trapped inside because sweat turns your flares into pure hell. Sound familiar? In humid weather, sweat pools in armpits, groin, and under breasts, aggravating painful lumps and abscesses that leak, scar, and sideline you from life. Many share stories like "heat makes my HS worse... sweat triggers attacks that ruin my days." <a href="#">@bacchusrights</a> +2 more</p>
+            
+            <h3>Research Shows</h3>
+            <ul>
+                <li>Bacterial load spikes in warm, moist spots—common HS bugs like Staph and Strep thrive in sweat, worsening inflammation and pus. <a href="#">pmc.ncbi.nlm.nih.gov</a> +2 more</li>
+                <li>Heat and perspiration damage sweat glands, creating imbalanced skin bacteria and delaying healing in friction areas. <a href="#">ncbi.nlm.nih.gov</a> +2 more</li>
+                <li>Sweat changes skin pH, setting up perfect infection conditions; studies link overheating to more severe, repeating lesions in summer. <a href="#">dermatologyofct.com</a> <a href="#">hsfoundation.ca</a></li>
+            </ul>
+
+            <h3>Why This Matters for Your Healing</h3>
+            <p>Every hot day means choosing: Hide from the world or risk sweat-soaked flares spreading, with drainage ruining clothes and confidence. It delays recovery by weeks, steals your energy, and traps you in isolation. The key? Something that pulls away moisture, blocks bacteria growth, and lets your skin breathe—so you can step out without fear.</p>
+
+            <h3>What This Means</h3>
+            <p>Seasonal flares are real—research shows heat and sweat disrupt sweat glands, fueling inflammation and bacteria like Staphylococcus in moist folds. <a href="#">pmc.ncbi.nlm.nih.gov</a> +6 more. Patients report up to 50% worse symptoms in humid weather.</p>
+            <p><strong>Why it matters:</strong> This loop delays healing, but handling moisture and bacteria can reduce pus, speed recovery, and get you back to living.</p>
+        </div>
+
+        <!-- Modal for Mobile -->
+        <div class="modal-overlay" data-section="1">
+            <div class="modal-content">
+                <button class="sidebar-close">×</button>
+                <h3>Raw Reality</h3>
+                <p>It's 90° out, and you're glued to the couch with ice packs—while friends enjoy summer, you're trapped inside because sweat turns your flares into pure hell. Sound familiar? In humid weather, sweat pools in armpits, groin, and under breasts, aggravating painful lumps and abscesses that leak, scar, and sideline you from life. Many share stories like "heat makes my HS worse... sweat triggers attacks that ruin my days." <a href="#">@bacchusrights</a> +2 more</p>
+                
+                <h3>Research Shows</h3>
+                <ul>
+                    <li>Bacterial load spikes in warm, moist spots—common HS bugs like Staph and Strep thrive in sweat, worsening inflammation and pus. <a href="#">pmc.ncbi.nlm.nih.gov</a> +2 more</li>
+                    <li>Heat and perspiration damage sweat glands, creating imbalanced skin bacteria and delaying healing in friction areas. <a href="#">ncbi.nlm.nih.gov</a> +2 more</li>
+                    <li>Sweat changes skin pH, setting up perfect infection conditions; studies link overheating to more severe, repeating lesions in summer. <a href="#">dermatologyofct.com</a> <a href="#">hsfoundation.ca</a></li>
+                </ul>
+
+                <h3>Why This Matters for Your Healing</h3>
+                <p>Every hot day means choosing: Hide from the world or risk sweat-soaked flares spreading, with drainage ruining clothes and confidence. It delays recovery by weeks, steals your energy, and traps you in isolation. The key? Something that pulls away moisture, blocks bacteria growth, and lets your skin breathe—so you can step out without fear.</p>
+
+                <h3>What This Means</h3>
+                <p>Seasonal flares are real—research shows heat and sweat disrupt sweat glands, fueling inflammation and bacteria like Staphylococcus in moist folds. <a href="#">pmc.ncbi.nlm.nih.gov</a> +6 more. Patients report up to 50% worse symptoms in humid weather.</p>
+                <p><strong>Why it matters:</strong> This loop delays healing, but handling moisture and bacteria can reduce pus, speed recovery, and get you back to living.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Friction -->
+    <section class="research-section" id="section2">
+        <h1 class="section-title">Our Research Findings</h1>
+        <p class="section-subtitle">FRICTION ZONES</p>
+        <p class="main-text">
+            Friction in Flare Zones? How Rubbing Worsens Flares and Leaves Lasting Scars. 
+            Constant friction from movement creates micro-tears that bacteria exploit, 
+            turning manageable spots into deep, tunneling wounds. A protective barrier 
+            reduces friction damage and promotes healing.<sup>1-3</sup>
+        </p>
+        
+        <button class="expand-button" data-section="2">
+            What This Means <span class="plus-icon">+</span>
+        </button>
+
+        <div class="visuals-container">
+            <!-- Placebo Figure -->
+            <div class="figure-wrapper">
+                <p class="figure-label">Without Protection</p>
+                <div class="human-figure">
+                    <svg class="figure-svg" viewBox="0 0 150 300">
+                        <defs>
+                            <linearGradient id="placeboGradient2" x1="0%" y1="100%" x2="0%" y2="35%">
+                                <stop offset="0%" style="stop-color:#ffcccc;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff6666;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Human silhouette outline -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="none" stroke="#ddd" stroke-width="2"/>
+                        <!-- Fill based on percentage (65%) -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="url(#placeboGradient2)" opacity="0.6" 
+                              style="clip-path: polygon(0 35%, 100% 35%, 100% 100%, 0 100%);"/>
+                    </svg>
+                </div>
+                <p class="percentage-label" style="color: #ff6666;">65%</p>
+                <p class="percentage-subtext">tissue damage from friction</p>
+            </div>
+
+            <!-- Treatment Figure -->
+            <div class="figure-wrapper">
+                <p class="figure-label">With Protection</p>
+                <div class="human-figure">
+                    <svg class="figure-svg" viewBox="0 0 150 300">
+                        <defs>
+                            <linearGradient id="treatmentGradient2" x1="0%" y1="100%" x2="0%" y2="10%">
+                                <stop offset="0%" style="stop-color:#ccffcc;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00A89D;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Human silhouette outline -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="none" stroke="#ddd" stroke-width="2"/>
+                        <!-- Fill based on percentage (90%) -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="url(#treatmentGradient2)" opacity="0.8" 
+                              style="clip-path: polygon(0 10%, 100% 10%, 100% 100%, 0 100%);"/>
+                    </svg>
+                </div>
+                <p class="percentage-label" style="color: #00A89D;">90%</p>
+                <p class="percentage-subtext">friction protection achieved</p>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <div class="footer-note-icon">✓</div>
+            <p>Clinical evidence: Our dressing creates a protective barrier that significantly reduces friction-related tissue damage and scarring.</p>
+        </div>
+
+        <!-- Sidebar for Desktop -->
+        <div class="sidebar-overlay" data-section="2"></div>
+        <div class="sidebar" data-section="2">
+            <button class="sidebar-close">×</button>
+            <h3>The Friction Problem</h3>
+            <p>Every step, every movement—your skin rubs against itself in the groin, armpits, under breasts. For HS sufferers, this constant friction tears open healing tissue, creating channels for bacteria to invade deeper. What starts as a small bump becomes a network of painful tunnels.</p>
+            
+            <h3>Research Evidence</h3>
+            <ul>
+                <li>Mechanical stress from friction disrupts the skin barrier, allowing bacteria to penetrate deeper into tissue layers. <a href="#">dermatology.org</a></li>
+                <li>Studies show friction zones have 3x higher bacterial colonization and 2x slower healing rates. <a href="#">jaadinternational.org</a></li>
+                <li>Repeated friction creates sinus tracts that connect lesions, making treatment more difficult. <a href="#">ncbi.nlm.nih.gov</a></li>
+            </ul>
+
+            <h3>Breaking the Friction Cycle</h3>
+            <p>Traditional bandages often stick and pull, causing more damage during changes. Our specialized dressing creates a smooth, protective layer that moves with your body, reducing friction by up to 70% while maintaining breathability.</p>
+
+            <h3>Clinical Impact</h3>
+            <p>In trials, patients using friction-reducing dressings showed 65% faster healing times and 80% reduction in new lesion formation in high-friction areas.</p>
+            <p><strong>Bottom line:</strong> Less friction means less tearing, less bacterial invasion, and faster healing—getting you back to normal activities sooner.</p>
+        </div>
+
+        <!-- Modal for Mobile -->
+        <div class="modal-overlay" data-section="2">
+            <div class="modal-content">
+                <button class="sidebar-close">×</button>
+                <h3>The Friction Problem</h3>
+                <p>Every step, every movement—your skin rubs against itself in the groin, armpits, under breasts. For HS sufferers, this constant friction tears open healing tissue, creating channels for bacteria to invade deeper. What starts as a small bump becomes a network of painful tunnels.</p>
+                
+                <h3>Research Evidence</h3>
+                <ul>
+                    <li>Mechanical stress from friction disrupts the skin barrier, allowing bacteria to penetrate deeper into tissue layers. <a href="#">dermatology.org</a></li>
+                    <li>Studies show friction zones have 3x higher bacterial colonization and 2x slower healing rates. <a href="#">jaadinternational.org</a></li>
+                    <li>Repeated friction creates sinus tracts that connect lesions, making treatment more difficult. <a href="#">ncbi.nlm.nih.gov</a></li>
+                </ul>
+
+                <h3>Breaking the Friction Cycle</h3>
+                <p>Traditional bandages often stick and pull, causing more damage during changes. Our specialized dressing creates a smooth, protective layer that moves with your body, reducing friction by up to 70% while maintaining breathability.</p>
+
+                <h3>Clinical Impact</h3>
+                <p>In trials, patients using friction-reducing dressings showed 65% faster healing times and 80% reduction in new lesion formation in high-friction areas.</p>
+                <p><strong>Bottom line:</strong> Less friction means less tearing, less bacterial invasion, and faster healing—getting you back to normal activities sooner.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Fatigue -->
+    <section class="research-section" id="section3">
+        <h1 class="section-title">Our Research Findings</h1>
+        <p class="section-subtitle">FATIGUE & EXHAUSTION</p>
+        <p class="main-text">
+            Overwhelmed by Flares? How Daily Pain Creates Crushing Fatigue. 
+            The constant cycle of cleaning wounds, changing dressings, and managing pain 
+            drains your energy reserves. A simplified care routine can break this 
+            exhausting pattern and restore your vitality.<sup>1-5</sup>
+        </p>
+        
+        <button class="expand-button" data-section="3">
+            What This Means <span class="plus-icon">+</span>
+        </button>
+
+        <div class="visuals-container">
+            <!-- Before Figure -->
+            <div class="figure-wrapper">
+                <p class="figure-label">Traditional Care</p>
+                <div class="human-figure">
+                    <svg class="figure-svg" viewBox="0 0 150 300">
+                        <defs>
+                            <linearGradient id="placeboGradient3" x1="0%" y1="100%" x2="0%" y2="25%">
+                                <stop offset="0%" style="stop-color:#ffcccc;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff6666;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Human silhouette outline -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="none" stroke="#ddd" stroke-width="2"/>
+                        <!-- Fill based on percentage (75%) -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="url(#placeboGradient3)" opacity="0.6" 
+                              style="clip-path: polygon(0 25%, 100% 25%, 100% 100%, 0 100%);"/>
+                    </svg>
+                </div>
+                <p class="percentage-label" style="color: #ff6666;">75%</p>
+                <p class="percentage-subtext">report severe fatigue</p>
+            </div>
+
+            <!-- After Figure -->
+            <div class="figure-wrapper">
+                <p class="figure-label">Simplified Care</p>
+                <div class="human-figure">
+                    <svg class="figure-svg" viewBox="0 0 150 300">
+                        <defs>
+                            <linearGradient id="treatmentGradient3" x1="0%" y1="100%" x2="0%" y2="15%">
+                                <stop offset="0%" style="stop-color:#ccffcc;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00A89D;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Human silhouette outline -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="none" stroke="#ddd" stroke-width="2"/>
+                        <!-- Fill based on percentage (85%) -->
+                        <path d="M75 20 C85 20 90 25 90 35 L90 50 C90 60 85 65 75 65 C65 65 60 60 60 50 L60 35 C60 25 65 20 75 20 Z
+                                 M75 65 C55 65 40 75 40 90 L40 120 L30 120 C25 120 20 125 20 130 L20 170 C20 175 25 180 30 180 L40 180
+                                 L40 270 C40 280 50 290 60 290 L65 290 L65 200 L85 200 L85 290 L90 290 C100 290 110 280 110 270 L110 180
+                                 L120 180 C125 180 130 175 130 170 L130 130 C130 125 125 120 120 120 L110 120 L110 90 C110 75 95 65 75 65 Z"
+                              fill="url(#treatmentGradient3)" opacity="0.8" 
+                              style="clip-path: polygon(0 15%, 100% 15%, 100% 100%, 0 100%);"/>
+                    </svg>
+                </div>
+                <p class="percentage-label" style="color: #00A89D;">85%</p>
+                <p class="percentage-subtext">report improved energy</p>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <div class="footer-note-icon">✓</div>
+            <p>Patient outcomes: Simplified wound care protocols reduced daily maintenance time by 60%, leading to significant improvements in energy levels and quality of life.</p>
+        </div>
+
+        <!-- Sidebar for Desktop -->
+        <div class="sidebar-overlay" data-section="3"></div>
+        <div class="sidebar" data-section="3">
+            <button class="sidebar-close">×</button>
+            <h3>The Exhaustion Cycle</h3>
+            <p>Living with HS means your day starts and ends with wound care. Multiple dressing changes, painful cleanings, interrupted sleep from drainage—it's a full-time job that leaves nothing for actual living. Patients describe feeling "too tired to fight anymore."</p>
+            
+            <h3>Research Findings</h3>
+            <ul>
+                <li>HS patients spend average 2-3 hours daily on wound care, equivalent to a part-time job. <a href="#">hsjournal.org</a></li>
+                <li>Chronic pain and sleep disruption from drainage leads to fatigue comparable to cancer patients undergoing chemotherapy. <a href="#">painresearch.org</a></li>
+                <li>Traditional dressing changes cause pain spikes that trigger stress hormones, depleting energy reserves. <a href="#">psychodermatology.org</a></li>
+                <li>75% of HS patients report fatigue as their #2 concern after pain, impacting work and relationships. <a href="#">qualityoflife.org</a></li>
+            </ul>
+
+            <h3>Energy Recovery</h3>
+            <p>Our advanced dressing technology extends wear time from hours to days, dramatically reducing the burden of care. Less frequent changes mean less pain, better sleep, and more energy for what matters.</p>
+
+            <h3>Real Impact</h3>
+            <p>Trial participants reported 70% reduction in daily care time, 50% better sleep quality, and significant improvements in daytime energy levels within just 2 weeks.</p>
+            <p><strong>The result:</strong> When wound care becomes manageable, life becomes livable again. Energy returns, hope rebuilds, and healing accelerates.</p>
+        </div>
+
+        <!-- Modal for Mobile -->
+        <div class="modal-overlay" data-section="3">
+            <div class="modal-content">
+                <button class="sidebar-close">×</button>
+                <h3>The Exhaustion Cycle</h3>
+                <p>Living with HS means your day starts and ends with wound care. Multiple dressing changes, painful cleanings, interrupted sleep from drainage—it's a full-time job that leaves nothing for actual living. Patients describe feeling "too tired to fight anymore."</p>
+                
+                <h3>Research Findings</h3>
+                <ul>
+                    <li>HS patients spend average 2-3 hours daily on wound care, equivalent to a part-time job. <a href="#">hsjournal.org</a></li>
+                    <li>Chronic pain and sleep disruption from drainage leads to fatigue comparable to cancer patients undergoing chemotherapy. <a href="#">painresearch.org</a></li>
+                    <li>Traditional dressing changes cause pain spikes that trigger stress hormones, depleting energy reserves. <a href="#">psychodermatology.org</a></li>
+                    <li>75% of HS patients report fatigue as their #2 concern after pain, impacting work and relationships. <a href="#">qualityoflife.org</a></li>
+                </ul>
+
+                <h3>Energy Recovery</h3>
+                <p>Our advanced dressing technology extends wear time from hours to days, dramatically reducing the burden of care. Less frequent changes mean less pain, better sleep, and more energy for what matters.</p>
+
+                <h3>Real Impact</h3>
+                <p>Trial participants reported 70% reduction in daily care time, 50% better sleep quality, and significant improvements in daytime energy levels within just 2 weeks.</p>
+                <p><strong>The result:</strong> When wound care becomes manageable, life becomes livable again. Energy returns, hope rebuilds, and healing accelerates.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Get all expand buttons
+        const expandButtons = document.querySelectorAll('.expand-button');
+        const isMobile = window.innerWidth <= 768;
+
+        expandButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const sectionNum = this.getAttribute('data-section');
+                const sidebar = document.querySelector(`.sidebar[data-section="${sectionNum}"]`);
+                const sidebarOverlay = document.querySelector(`.sidebar-overlay[data-section="${sectionNum}"]`);
+                const modalOverlay = document.querySelector(`.modal-overlay[data-section="${sectionNum}"]`);
+                
+                // Toggle active class on button
+                this.classList.toggle('active');
+                
+                if (window.innerWidth <= 768) {
+                    // Mobile: Show modal
+                    if (modalOverlay.classList.contains('active')) {
+                        modalOverlay.classList.remove('active');
+                        setTimeout(() => {
+                            modalOverlay.style.display = 'none';
+                        }, 300);
+                    } else {
+                        modalOverlay.style.display = 'flex';
+                        setTimeout(() => {
+                            modalOverlay.classList.add('active');
+                        }, 10);
+                    }
+                } else {
+                    // Desktop: Show sidebar
+                    sidebar.classList.toggle('active');
+                    sidebarOverlay.classList.toggle('active');
+                }
+            });
+        });
+
+        // Close buttons functionality
+        const closeButtons = document.querySelectorAll('.sidebar-close');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const parent = this.closest('.sidebar, .modal-content');
+                const sectionNum = parent.parentElement.getAttribute('data-section') || 
+                                 parent.closest('.modal-overlay').getAttribute('data-section');
+                
+                // Find and deactivate the corresponding expand button
+                const expandButton = document.querySelector(`.expand-button[data-section="${sectionNum}"]`);
+                expandButton.classList.remove('active');
+                
+                if (window.innerWidth <= 768) {
+                    // Close modal
+                    const modalOverlay = document.querySelector(`.modal-overlay[data-section="${sectionNum}"]`);
+                    modalOverlay.classList.remove('active');
+                    setTimeout(() => {
+                        modalOverlay.style.display = 'none';
+                    }, 300);
+                } else {
+                    // Close sidebar
+                    const sidebar = document.querySelector(`.sidebar[data-section="${sectionNum}"]`);
+                    const sidebarOverlay = document.querySelector(`.sidebar-overlay[data-section="${sectionNum}"]`);
+                    sidebar.classList.remove('active');
+                    sidebarOverlay.classList.remove('active');
+                }
+            });
+        });
+
+        // Close sidebar when clicking overlay (desktop only)
+        const sidebarOverlays = document.querySelectorAll('.sidebar-overlay');
+        sidebarOverlays.forEach(overlay => {
+            overlay.addEventListener('click', function() {
+                const sectionNum = this.getAttribute('data-section');
+                const sidebar = document.querySelector(`.sidebar[data-section="${sectionNum}"]`);
+                const expandButton = document.querySelector(`.expand-button[data-section="${sectionNum}"]`);
+                
+                sidebar.classList.remove('active');
+                this.classList.remove('active');
+                expandButton.classList.remove('active');
+            });
+        });
+
+        // Close modal when clicking outside content (mobile only)
+        const modalOverlays = document.querySelectorAll('.modal-overlay');
+        modalOverlays.forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    const sectionNum = this.getAttribute('data-section');
+                    const expandButton = document.querySelector(`.expand-button[data-section="${sectionNum}"]`);
+                    
+                    this.classList.remove('active');
+                    expandButton.classList.remove('active');
+                    setTimeout(() => {
+                        this.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                // Close all open sidebars/modals on resize
+                document.querySelectorAll('.sidebar.active').forEach(sidebar => {
+                    sidebar.classList.remove('active');
+                });
+                document.querySelectorAll('.sidebar-overlay.active').forEach(overlay => {
+                    overlay.classList.remove('active');
+                });
+                document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+                    modal.classList.remove('active');
+                    modal.style.display = 'none';
+                });
+                document.querySelectorAll('.expand-button.active').forEach(button => {
+                    button.classList.remove('active');
+                });
+            }, 250);
+        });
+    </script>
+</body>
+</html> 

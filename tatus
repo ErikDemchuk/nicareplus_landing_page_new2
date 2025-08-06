@@ -1,0 +1,40 @@
+[1mdiff --git a/src/components/Footer.tsx b/src/components/Footer.tsx[m
+[1mindex 4fc8f3a..2512233 100644[m
+[1m--- a/src/components/Footer.tsx[m
+[1m+++ b/src/components/Footer.tsx[m
+[36m@@ -10,7 +10,7 @@[m [mconst containerVariants = {[m
+     y: 0,[m
+     transition: {[m
+       duration: 0.8,[m
+[31m-      ease: "easeOut",[m
+[32m+[m[32m      ease: [0.25, 0.46, 0.45, 0.94],[m
+       staggerChildren: 0.1,[m
+     },[m
+   },[m
+[36m@@ -21,7 +21,7 @@[m [mconst itemVariants = {[m
+   visible: {[m
+     opacity: 1,[m
+     x: 0,[m
+[31m-    transition: { duration: 0.6, ease: "easeOut" },[m
+[32m+[m[32m    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },[m
+   },[m
+ }[m
+ [m
+[36m@@ -30,7 +30,7 @@[m [mconst linkVariants = {[m
+   visible: {[m
+     opacity: 1,[m
+     y: 0,[m
+[31m-    transition: { duration: 0.4, ease: "easeOut" },[m
+[32m+[m[32m    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },[m
+   },[m
+ }[m
+ [m
+[36m@@ -54,7 +54,7 @@[m [mconst backgroundVariants = {[m
+     scale: 1,[m
+     transition: {[m
+       duration: 2,[m
+[31m-      ease: "easeOut",[m
+[32m+[m[32m      ease: [0.25, 0.46, 0.45, 0.94],[m
+     },[m
+   },[m
+ }[m
