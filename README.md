@@ -1,5 +1,7 @@
 # Flare Paradox - Next.js + Shopify + AI Integration
 
+> **Status**: Deployment fixes applied for Next.js 15 compatibility and Framer Motion TypeScript errors
+
 ## 🚀 Project Setup
 
 This is a Next.js 15 project with TypeScript, Tailwind CSS, and integrated Shopify headless commerce + AI features.
