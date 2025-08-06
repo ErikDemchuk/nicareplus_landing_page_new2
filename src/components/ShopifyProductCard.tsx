@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ShopifyProduct, formatPrice, getProductImage, getFirstAvailableVariant } from '@/hooks/useShopify';
+import { formatPrice, getProductImage, getFirstAvailableVariant } from '@/hooks/useShopify';
+import { ShopifyProduct } from '@/lib/shopify-client';
 import ShopifyCheckoutButton from './ShopifyCheckoutButton';
 
 interface ShopifyProductCardProps {
