@@ -10,7 +10,7 @@ const containerVariants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut",
+      ease: [0.25, 0.46, 0.45, 0.94],
       staggerChildren: 0.1,
     },
   },
@@ -21,7 +21,7 @@ const itemVariants = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 }
 
@@ -30,7 +30,7 @@ const linkVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: "easeOut" },
+    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 }
 
@@ -54,7 +54,7 @@ const backgroundVariants = {
     scale: 1,
     transition: {
       duration: 2,
-      ease: "easeOut",
+      ease: [0.25, 0.46, 0.45, 0.94],
     },
   },
 }
